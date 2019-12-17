@@ -4,10 +4,10 @@
 # @author  :GursheeshKour
 # *********************************************************************************************************************************************
 
-
-def paren_balanced(paren_string):
+# this method determines whether parenthesis are balanced or not
+def paren_balanced(expression_):
     stack = []
-    for i in paren_string:
+    for i in expression_:
         if i == "[" or i == "{" or i == "(":
             stack.append(i)
         elif i == "]" or i == "}" or i == ")":
@@ -17,6 +17,7 @@ def paren_balanced(paren_string):
     else:
         print(False)
 
-
-paren_string = input("enter expression: ")
-paren_balanced(paren_string)
+#taking the arithematic expression as input
+expression_ = input("enter expression: ")
+#calling the method
+paren_balanced(expression_)
