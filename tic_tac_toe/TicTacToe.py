@@ -1,18 +1,20 @@
+#creating an empty board
 board = ["-", "-", "-",
          "-", "-", "-",
          "-", "-", "-"]
 
+#declaring varibles
 game_still_going = True
 winner = None
 current_player = "X"
 
-
+#method to display board
 def display_board():
     print(board[0] + " | " + board[1] + " | " + board[2])
     print(board[3] + " | " + board[4] + " | " + board[5])
     print(board[6] + " | " + board[7] + " | " + board[8])
 
-
+#method for playing game
 def play_game():
     display_board()
 
@@ -25,7 +27,7 @@ def play_game():
     elif winner == None:
         print("tie")
 
-
+#method for handeling turns
 def handle_turn(current_player):
     print(current_player+"'s turn")
     position = input("choose a position from 1-9: ")
@@ -43,12 +45,12 @@ def handle_turn(current_player):
     board[position] = current_player
     display_board()
 
-
+#method to check whether game is over or not
 def check_game_over():
     check_if_win()
     check_if_tie()
 
-
+#method to check if player wins or not
 def check_if_win():
     global winner
     row_winner = check_rows()
@@ -64,6 +66,7 @@ def check_if_win():
         winner = None
     return
 
+#method to check rows
 def check_rows():
     global game_still_going
     row1 = board[0] = board[1] = board[2] != "-"
@@ -78,6 +81,8 @@ def check_rows():
     elif row3:
         return board[6]
     return
+
+#method to check columns
 def check_columns():
     global game_still_going
     column1 = board[0] = board[3] = board[6] != "-"
@@ -92,6 +97,8 @@ def check_columns():
     elif column3:
         return board[2]
     return
+
+#method to check diagonals
 def check_diagonals():
     global game_still_going
     diagonal1 = board[0] = board[4] = board[8] != "-"
@@ -105,14 +112,14 @@ def check_diagonals():
         return board[6]
     return
 
-
+#method to check whether its a tie or not
 def check_if_tie():
     global game_still_going
     if "-" not in board:
         game_still_going = False
     return
 
-
+#method to change turn of a player
 def flip_player():
     global current_player
     if current_player == "X":
@@ -121,5 +128,5 @@ def flip_player():
         current_player = "X"
     return
 
-
+#method being called
 play_game()
