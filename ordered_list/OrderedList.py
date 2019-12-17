@@ -3,13 +3,13 @@
 # @file    :Ordered_List.py
 # @author  :GursheeshKour
 # *********************************************************************************************************************************************
-from business_logic import linked_lists
+from util.utility.py import Linked_List
 
 
 def openfile():
     file = open("Num_File.txt", "r+")
     x = file.read()
-    li = linked_list()
+    li = Linked_List()
     for word in x.split():
         li.add(word)
     li.display()
