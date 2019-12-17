@@ -12,6 +12,7 @@ def cash_counter():
     for i in range(y):
         x = int(input("For Deposit enter: 1 and For Withdraw enter2:"))
 
+        #for deposit
         if x == 1:
 
             #creating a method to deposit
@@ -30,6 +31,7 @@ def cash_counter():
             #storing the return value of the respective method in result
             result = deposit_withdrawl()
 
+        #for withdrawl
         elif x == 2:
             print("available balance is", result)
             withdr = eval(input("enter the amount to withdraw"))
