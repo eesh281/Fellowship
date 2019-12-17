@@ -18,6 +18,7 @@ def openfile():
     li.display()
     li = li.sort()
     li.display()
+    #taking the word to be searched from user
     s_word = input("enter a word to search: ")
     li.search(s_word)
     li.append(s_word)
