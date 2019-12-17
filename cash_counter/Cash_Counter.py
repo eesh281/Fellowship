@@ -7,7 +7,7 @@
 from util.utility import Queue
 
 #creating a method for cash counter
-def cash_counter(self):
+def cash_counter():
     y = int(input("enter the total number of times you want to deposit or withdraw :"))
     for i in range(y):
         x = int(input("For Deposit enter: 1 and For Withdraw enter2:"))
@@ -39,4 +39,4 @@ def cash_counter(self):
 
 #creating an object of imported class
 q = Queue()
-q.cash_counter()
+cash_counter()
