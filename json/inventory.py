@@ -1,20 +1,36 @@
 import json
 
-file = open("/home/user/Desktop/newfolder/Fellowship/json/json_file.json","r")
-data_read = json.load(file)
-#print(data_read)
+class Json_Inventory:
+    
+    def json_inventory(self):
+        file = open("/home/user/Desktop/newfolder/Fellowship/json/json_file.json","r")
+        data_read_dict = json.load(file)
+        rice_arr = data_read_dict["Rice"]
+        wheat_arr = data_read_dict["Wheat"]
+        pulse_arr = data_read_dict["Pulse"]
 
-def inventory_rice():
-    for rice in data_read["Rice"]:
-        print(rice)
-        rice_variety(rice)
+        rice_price = 0
+        pulse_price = 0
+        wheat_price = 0
+
         
-        def rice_variety(i):
-            for name in i["name"]:
-                print(name)
+            
+        for rice_key in rice_arr:
+            rice_price = rice_price + rice_key["price"]
+            
+        for pulse_key in pulse_arr:
+            pulse_price = pulse_price + pulse_key["price"]
 
-def inventory_pulse():
-    for pulse in data_read("Pulse"):
-        print(pulse)
+        for  wheat_key in wheat_arr:
+            wheat_price = wheat_price + wheat_key["price"]
 
-inventory_rice()       
+    
+            
+        output = print(f"The price of rice is {rice_price}.\nThe price of wheat is {wheat_price}.\nThe price of Pulse is {pulse_price}. ")
+        return output
+
+b = Json_Inventory()
+b.json_inventory()
+b
+
+    
