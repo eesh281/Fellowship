@@ -1,29 +1,29 @@
 {"Stock_name":[
     {
     "comp_name" : "RELIANCE",
-    "num_share" : 25,
-    "price" : 100000
+    "numof_share" : 25,
+    "price" : 1000
     },
 
     {
     "comp_name" : "WIPRO",
-    "num_share" : 15,
-    "price" : 90000
+    "numof_share" : 15,
+    "price" : 900
     },
     {
     "comp_name" : "TITAN",
-    "num_share" : 18,
-    "price" : 50000
+    "numof_share" : 18,
+    "price" : 500
     },
     {
     "comp_name" : "TATASTEEL",
-    "num_share" : 45,
-    "price" : 250000
+    "numof_share" : 45,
+    "price" : 2500
     },
     {
     "comp_name" : "TCS",
-    "num_share" : 9,
-    "price" : 60000
+    "numof_share" : 9,
+    "price" : 600
     }
     ]
 }
