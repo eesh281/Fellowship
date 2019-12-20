@@ -3,17 +3,21 @@
 #@file:stock_portfo.py
 #@author:Gursheesh Kour
 #*****************************************************************************************************
-import json
 
+#importing json module 
+import json
+#creating a class for calculating values
 class Cal_Stock:
     
+    #method to find value of each stock
     def valueof_each(self, stock_arr):
         each_price = 0
 
         for key in stock_arr:
             each_price =  key["numof_share"] * key["price"]
-        print("price of each stock is: ", each_price)
+            print("price of each stock is respectively is : ", each_price)
         
+    #method to find total value of stock
     def total_value(self, stock_arr):
         total_price = 0
 
