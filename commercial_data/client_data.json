@@ -23,20 +23,20 @@
 
 "Shares" :[
     {
-    "share":"technical",
+    "share":"HCL",
     "amount": 5000,
     "stock": 4000,
     "symbol": "$"
     },
 
     {
-    "share":"marketing",
+    "share":"TATA",
     "amount": 3000,
     "stock": 6000,
     "symbol": "$"
     },
 
-    {"share":"management",
+    {"share":"BRIDGELABZ",
     "amount": 7000,
     "stock": 9000,
     "symbol": "$"
