@@ -58,7 +58,7 @@ class StockAccount:
                     json_file = open("/home/user/Desktop/newfolder/Fellowship/commercial_data/client_data.json", "w")
                     json.dump(data_dict, json_file)
     #closing the file after performing the operation
-    file.close()
+        file.close()
 
 if __name__ == '__main__' :
 
@@ -90,7 +90,7 @@ if __name__ == '__main__' :
         Age = int(input("Enter the Age: "))
         phnum = int(input("Enter your Mobile Number: "))
         amount = int(input("Enter the Amount for Shares: "))
-        cont = f.write(' [{'+'     "Name" : "'+ name +'",\n' + '        "Age"  : "'+str(Age)+'",\n'+'       "Ph.No" : "'+str(phno)+'",\n'+'"Share Amount" : "'+str(amount)+'" }]\n'+''         )
+        cont = f.write(' [{'+'     "Name" : "'+ name +'",\n' + '        "Age"  : "'+str(Age)+'",\n'+'       "Ph.No" : "'+str(phnum)+'",\n'+'"Share Amount" : "'+str(amount)+'" }]\n'+''         )
        
         print("The Data has been Stored Successfully in 'newUser.json' file. ")
     #closing the file after use
