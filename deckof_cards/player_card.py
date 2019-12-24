@@ -1,3 +1,10 @@
+#********************************************************************************************************
+#@purpose: implement game of playing cards
+#@file:player_card.py
+#@author:Gursheesh Kour
+#*********************************************************************************************************
+
+#importing required classes
 from cards import Card
 from deck import Deck
 
@@ -10,7 +17,7 @@ class Player(object):
         print ("I am {}".format(self.name))
         return self
 
-    # Draw n number of cards from a deck
+   
     # Returns true in n cards are drawn, false if less then that
     def draw(self, deck, num=1):
         for _ in range(num):
@@ -29,14 +36,9 @@ class Player(object):
     def discard(self):
         return self.hand.pop()
 
-# Test making a Card
-# card = Card('Spades', 6)
-# print card
 
-# Test making a Deck
 myDeck = Deck()
 myDeck.shuffle()
-# deck.display()
 
 obj = Player("Gursheesh")
 obj.sayHello()

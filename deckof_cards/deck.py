@@ -1,3 +1,11 @@
+#********************************************************************************************************
+#@purpose: implement game of playing cards
+#@file:deck.py
+#@author:Gursheesh Kour
+#*********************************************************************************************************
+
+
+#importing required modules
 import random
 from cards import Card
 
@@ -22,15 +30,12 @@ class Deck(object):
     def shuffle(self, num=1):
         length = len(self.cards)
         for _ in range(num):
-            # This is the fisher yates shuffle algorithm
             for i in range(length-1, 0, -1):
                 randi = random.randint(0, i)
                 if i == randi:
                     continue
                 self.cards[i], self.cards[randi] = self.cards[randi], self.cards[i]
-            # You can also use the build in shuffle method
-            # random.shuffle(self.cards)
-
+           
     # Return the top card
     def deal(self):
         return self.cards.pop()

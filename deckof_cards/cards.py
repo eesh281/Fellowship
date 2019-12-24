@@ -1,18 +1,19 @@
 #********************************************************************************************************
-#@purpose
-#@file
-#@author
+#@purpose: implement game of playing cards
+#@file:cards.py
+#@author:Gursheesh Kour
 #*********************************************************************************************************
 
 
 class Card(object):
     
+    #initializing the attributes of the class
     def __init__(self, suit, val):
         
         self.suit = suit
         self.value = val
 
-    # Implementing build in methods so that you can print a card object
+    # using build in methods so that you can print a card object
     def __unicode__(self):
         return self.display()
     
