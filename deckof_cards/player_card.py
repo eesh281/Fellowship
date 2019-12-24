@@ -1,5 +1,5 @@
-from deck_of_cards import Card
-from deck_of_cards import Deck
+from cards import Card
+from deck import Deck
 
 class Player(object):
     def __init__(self, name):
