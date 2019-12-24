@@ -4,21 +4,29 @@
 #@author :Gursheesh Kour
 #*******************************************************************************************************
 
-#importing json module
-import json
+try:
+    #importing json module
+    import json
+except ImportError:
+    print("Import Error") 
 
 class StockAccount:
 
     #getting details from json file
     def stock_details(self):
         
-        #openning a file to read 
-        file=open("/home/user/Desktop/newfolder/Fellowship/commercial_data/client_data.json","r")
-       
-        #loading data from json file
-        data_dict= json.load(file)
-        share_arr =data_dict["Shares"]
-
+        try:
+            #openning a file to read 
+            file=open("/home/user/Desktop/newfolder/Fellowship/commercial_data/client_data.json","r")
+        
+            #loading data from json file
+            data_dict= json.load(file)
+            share_arr =data_dict["Shares"]
+        
+        except FileNotFoundError:
+            
+            print("Could not load file")
+        
         x = int(input("\n0 for HCL \n1 for TATA \n2 for BRIDGELABZ"))
         
         #comparing the input value for running various conditions
