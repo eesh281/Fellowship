@@ -21,3 +21,24 @@ class Player(object):
                 return False
         return True
 
+    # Display all the cards in the players hand
+    def displayHand(self):
+        print ("{}'s hand: {}".format(self.name, self.hand))
+        return self
+
+    def discard(self):
+        return self.hand.pop()
+
+# Test making a Card
+# card = Card('Spades', 6)
+# print card
+
+# Test making a Deck
+myDeck = Deck()
+myDeck.shuffle()
+# deck.display()
+
+obj = Player("Gursheesh")
+obj.sayHello()
+obj.draw(myDeck, 5)
+obj.displayHand()
