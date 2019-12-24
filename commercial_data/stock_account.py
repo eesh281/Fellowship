@@ -7,76 +7,94 @@
 #importing json module
 import json
 
-#creating stock account class
 class StockAccount:
 
-    #creating a method to open file
-    def openning_file(self):
-        file = open("/home/user/Desktop/newfolder/Fellowship/commercial_data/client_data.json", "r")
-        data_dict = json.load(file)
-        share_arr = data_dict["Shares"]
-        x = int(input("Type: 0 for HCL \n Type: 1 for TATA \n Type: 2 for BRIDGELABZ \n"))
-
-        #providing a choice for selecting company
-        if x == 0:
-            share_amount = share_arr[0]
-            final_amount = share_amount["amount"]
-            print(final_amount)
-            return final_amount
-
-        if x == 1:
-            share_amount = share_arr[1]
-            final_amount = share_amount["amount"]
-            print(final_amount)
-            return final_amount
-
-        if x == 2:
-            share_amount = share_arr[2]
-            final_amount = share_amount["amount"]
-            print(final_amount)
-            return final_amount
+    #getting details from json file
+    def stock_details(self):
         
-        return share_arr   
-        
-        
-    #creating a method to update the json file
-    def update_json(self, final_amount):
+        #openning a file to read 
+        file=open("/home/user/Desktop/newfolder/Fellowship/commercial_data/client_data.json","r")
        
-        input_amount = int(input("enter the amount for the shares: "))
-        substract = final_amount - input_amount
-        print(substract)
-        return substract 
+        #loading data from json file
+        data_dict= json.load(file)
+        share_arr =data_dict["Shares"]
 
-    
-#creating an object of class
-obj = StockAccount()
-a= obj.openning_file()
-data = obj.update_json(a)
-
+        x = int(input("\n0 for HCL \n1 for TATA \n2 for BRIDGELABZ"))
+        
+        #comparing the input value for running various conditions
+        if x == 0:
+            
+            for data in data_dict["Shares"]:
+                
+                if data['share'] == "HCL":
+                    
+                    input_amount=int(input("enter amount"))  
+                    data['amount'] -= input_amount
+                    
+                    json_file = open("/home/user/Desktop/newfolder/Fellowship/commercial_data/client_data.json", "w")
+                    json.dump(data_dict, json_file)
+       
+        if x == 1:
+            
+            for data in data_dict["Shares"]:
+               
+                if data['share'] == "TATA": 
+                    
+                    input_amount=int(input("enter amount"))
+                    data['amount'] -= input_amount
+                    
+                    json_file = open("/home/user/Desktop/newfolder/Fellowship/commercial_data/client_data.json", "w")
+                    json.dump(data_dict, json_file)
+        
+        if x == 2:
+            
+            for data in data_dict["Shares"]:
+                
+                if data['share'] == "BRIDGELABZ":
+                    
+                    input_amount=int(input("enter amount"))
+                    data['amount'] -= input_amount
+                    
+                    json_file = open("/home/user/Desktop/newfolder/Fellowship/commercial_data/client_data.json", "w")
+                    json.dump(data_dict, json_file)
+    #closing the file after performing the operation
+    file.close()
 
 if __name__ == '__main__' :
 
-    #inputting whether to register a user or existing user
-    inp = input(" type : Y if you are an existing user and type : N if you are a new user:")
+    inp = input(" Are you an existing user(y/n):")
+    file=open("/home/user/Desktop/newfolder/Fellowship/commercial_data/client_data.json","r")
+    #loading data from json file
+    data_dict= json.load(file)
+    user_arr =data_dict["Users"]
+
+    #condition to check whether the costumer is registered or not
     if (inp == "y") or (inp == "Y"):
-        file2 = open("/home/user/Desktop/newfolder/Fellowship/commercial_data/file.json", "w")
-        #adding updated data to json file 
-        json.dump(data, file2, indent=4)
         
+        costumer_key = input("enter costumer id - 'registered name': ")
         
+        for data in data_dict["Users"]:
+           
+            if costumer_key == data["name"]:
+               
+                print("welcome back!")
+                obj1 = StockAccount()
+                obj1.stock_details()
+      
     else:
-        #openning the file to add new user
-        f = open("/home/user/Desktop/newfolder/Fellowship/commercial_data/company_data.json","a+")
-        name = input("Enter the Name: ")
-        age = int(input("Enter the age: "))
-        number = int(input("Enter your Mobile Number: "))
-        address = (input("Enter the Address: "))
-        writting = f.write(' [{'+'     "Name" : "'+ name +'",\n' + '        "Age"  : "'+str(age)+'",\n'+'       "Ph.No" : "'+str(number)+'",\n'+'"Address" : "'+str(address)+'" }]')
-        print("The Data has been Stored Successfully in the file. ")
-
-
-
+        
+        #appending a new user into the file
+        f = open("newUser.json","a+")
        
+        name = input("Enter the Name: ")
+        Age = int(input("Enter the Age: "))
+        phnum = int(input("Enter your Mobile Number: "))
+        amount = int(input("Enter the Amount for Shares: "))
+        cont = f.write(' [{'+'     "Name" : "'+ name +'",\n' + '        "Age"  : "'+str(Age)+'",\n'+'       "Ph.No" : "'+str(phno)+'",\n'+'"Share Amount" : "'+str(amount)+'" }]\n'+''         )
+       
+        print("The Data has been Stored Successfully in 'newUser.json' file. ")
+    #closing the file after use
+    file.close()
 
 
 
