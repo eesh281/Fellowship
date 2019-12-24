@@ -80,6 +80,9 @@ if __name__ == '__main__' :
                 print("welcome back!")
                 obj1 = StockAccount()
                 obj1.stock_details()
+            
+            else: 
+                print("Not an existing user!")
       
     else:
         
