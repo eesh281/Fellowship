@@ -8,7 +8,7 @@ try:
     #importing json module
     import json
 except ImportError:
-    print("Import Error") 
+    print("Error while Importing")
 
 class StockAccount:
 
@@ -17,16 +17,15 @@ class StockAccount:
         
         try:
             #openning a file to read 
-            file=open("/home/user/Desktop/newfolder/Fellowship/commercial_data/client_data.json","r")
-        
+            file = open("/home/user/Desktop/newfolder/Fellowship/commercial_data/client_data.json","r")
+       
             #loading data from json file
             data_dict= json.load(file)
-            share_arr =data_dict["Shares"]
-        
         except FileNotFoundError:
-            
-            print("Could not load file")
+            print("Error while loading file")
         
+        share_arr =data_dict["Shares"]
+
         x = int(input("\n0 for HCL \n1 for TATA \n2 for BRIDGELABZ"))
         
         #comparing the input value for running various conditions
@@ -89,8 +88,7 @@ if __name__ == '__main__' :
                 obj1 = StockAccount()
                 obj1.stock_details()
             
-            else: 
-                print("Not an existing user!")
+            
       
     else:
         
