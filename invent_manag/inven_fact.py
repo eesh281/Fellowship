@@ -3,6 +3,7 @@
 #@file   :invent_fact.py
 #@author :Gursheesh Kour
 #*******************************************************************************************************
+from __future__ import generators
 try:
     #importing required modules
     from __future__ import generators
