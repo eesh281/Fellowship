@@ -1,6 +1,6 @@
 import json
 
-class :
+class AddressBook:
 
     def openning_file(self):
 
@@ -8,7 +8,7 @@ class :
         data_dict = json.load(file)
         return data_dict
 
-    def user_details(self):
+    def add_person(self):
 
         add_user = {}
         add_user["first_name"] = input("enter your first name: ") 
