@@ -24,7 +24,6 @@ class StockAccount:
         except FileNotFoundError:
             print("Error while loading file")
         
-        share_arr =data_dict["Shares"]
 
         x = int(input("\n0 for HCL \n1 for TATA \n2 for BRIDGELABZ"))
         
