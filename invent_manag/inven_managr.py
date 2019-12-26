@@ -11,3 +11,4 @@ class FileOpen:
         rice_arr = data_read_dict["Rice"]
         wheat_arr = data_read_dict["Wheat"]
         pulse_arr = data_read_dict["Pulse"]
+        file.close()
