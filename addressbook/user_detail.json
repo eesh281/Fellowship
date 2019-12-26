@@ -4,7 +4,7 @@
     "last name" : "Kour",
     "address"   : "xyz",
     "city"      : "Jammu",
-    "zip"       : "180001",
+    "zip_code"  : "180001",
     "ph num"    : "123456789"
     },
     {
@@ -12,7 +12,7 @@
     "last name" : "Bhawnani",
     "address"   : "lmn",
     "city"      : "chathisgarh",
-    "zip"       : "190002",
+    "zip_code"  : "190002",
     "ph num"    : "123476789"
     },
     {
@@ -20,7 +20,7 @@
     "last name" : "Sharma",
     "address"   : "abc",
     "city"      : "bihar",
-    "zip"       : "180070",
+    "zip_code"  : "180070",
     "ph num"    : "123456129"
     },
     {
@@ -28,7 +28,7 @@
     "last name" : "Jain",
     "address"   : "pqr",
     "city"      : "Bhopal",
-    "zip"       : "123002",
+    "zip_code"  : "123002",
     "ph num"    : "876576789"
     }
     ]
