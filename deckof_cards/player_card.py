@@ -4,9 +4,14 @@
 #@author:Gursheesh Kour
 #*********************************************************************************************************
 
-#importing required classes
-from cards import Card
-from deck import Deck
+try:
+    #importing required classes
+    from cards import Card
+    from deck import Deck
+
+except ImportError:
+    print("Error while Importing")  
+
 
 class Player(object):
     def __init__(self, name):
