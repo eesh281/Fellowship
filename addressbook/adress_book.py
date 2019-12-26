@@ -1,6 +1,6 @@
 import json
 
-class OpenFile:
+class :
 
     def openning_file(self):
 
@@ -19,7 +19,9 @@ class OpenFile:
         return add_user
 
     def adding_user(self):
-        
+
+
+
 
 
 obj = OpenFile()
