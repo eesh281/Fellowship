@@ -10,7 +10,7 @@ import re
 import datetime
 
 #creating a class named Reg_ex for implementing regular expression
-class Reg_ex:
+class RegexImplementation:
 
     #method created
     def regex(self):
@@ -18,9 +18,9 @@ class Reg_ex:
         file = open("/home/user/Desktop/newfolder/Fellowship/regex/reg_text.txt", "r+")
         x = file.read()
         #using regex function sub
-        data = re.sub("[<]{2}[a-zA-Z]{4}[>]{2}", "Gursheesh", x) 
-        data = re.sub("[<]{2}[a-z]{8}[>]{2}", "Gursheesh Kour" , data)
-        data = re.sub("[x]{10}", "9419624315" , data)
+        data = re.sub(r"[<]{2}[a-zA-Z]{4}[>]{2}", "Gursheesh", x) 
+        data = re.sub(r"[<]{2}[a-z]{8}[>]{2}", "Gursheesh Kour" , data)
+        data = re.sub(r"[x]{10}", "9419624315" , data)
         today = str(datetime.date.today())
         data = re.sub("01/01/2016",today , data)
         #writing into the file
@@ -30,5 +30,5 @@ class Reg_ex:
         file.close()
 
 
-obj = Reg_ex()
+obj = RegexImplementation()
 obj.regex()
