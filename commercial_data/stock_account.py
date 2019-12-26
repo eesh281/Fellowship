@@ -99,7 +99,7 @@ if __name__ == '__main__' :
         phnum = int(input("Enter your Mobile Number: "))
         amount = int(input("Enter the Amount for Shares: "))
         cont = f.write(' [{'+'     "Name" : "'+ name +'",\n' + '        "Age"  : "'+str(Age)+'",\n'+'       "Ph.No" : "'+str(phnum)+'",\n'+'"Share Amount" : "'+str(amount)+'" }]\n'+''         )
-       
+        #data is being added to the json file
         print("The Data has been Stored Successfully in 'newUser.json' file. ")
     #closing the file after use
     file.close()
