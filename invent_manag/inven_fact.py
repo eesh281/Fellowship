@@ -3,10 +3,13 @@
 #@file   :invent_fact.py
 #@author :Gursheesh Kour
 #*******************************************************************************************************
-#importing required modules
-from __future__ import generators
-import random
-from enum import Enum, auto
+try:
+    #importing required modules
+    from __future__ import generators
+    import random
+    from enum import Enum, auto
+except ImportError:
+    print("Error while Importing")  
 
 #creating a enum class to define all attributes
 class ItemType(Enum):

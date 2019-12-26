@@ -1,4 +1,6 @@
-import json
+try:
+    import json
+
 
 class FileOpen:
     def open_file(self):
