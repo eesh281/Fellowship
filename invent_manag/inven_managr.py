@@ -1,5 +1,7 @@
 try:
     import json
+except ImportError:
+    print("Error while Importing")  
 
 
 class FileOpen:
