@@ -1,0 +1,78 @@
+{"Rice" :[ 
+    {
+    "name" : "Basmati", 
+    "weigh" : 12, 
+    "price" : 1500
+    },
+
+    {
+    "name" : "Brown", 
+    "weight" : 10, 
+    "price" : 2500
+    },
+
+    {
+    "name" : "Red", 
+    "weigh" : 15, 
+    "price" : 1200
+    },
+    
+    {
+    "name" : "Half", 
+    "weight" : 11, 
+    "price" : 2000
+    }
+    ],
+
+"Pulse" :[
+    {
+    "name" : "kidney_beans", 
+    "weight" : 5, 
+    "price" : 500
+    },
+
+    {
+    "name" : "green_lentils", 
+    "weight" : 3, 
+    "price" : 300
+    },
+
+    {
+    "name" : "yellow_lentils", 
+    "weigh" : 4, 
+    "price" : 100
+    },
+    
+    {
+    "name" : "Chickpeas", 
+    "weight" : 2, 
+    "price" : 600
+    }
+    ],
+
+"Wheat" :[
+    {
+    "name" : "common_wheat", 
+    "weight" : 8, 
+    "price" : 700
+    },
+
+    {
+    "name" : "spelt", 
+    "weight" : 7, 
+    "price" : 450
+    },
+
+    {
+    "name" : "golden", 
+    "weigh" : 5, 
+    "price" : 500
+    },
+    
+    {
+    "name" : "Beige", 
+    "weight" : 6, 
+    "price" : 250
+    }
+    ]
+}
