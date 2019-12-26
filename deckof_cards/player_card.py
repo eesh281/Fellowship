@@ -18,7 +18,7 @@ class Player(object):
         self.name = name
         self.hand = []
 
-    def sayHello(self):
+    def say_hello(self):
         print ("I am {}".format(self.name))
         return self
 
@@ -34,7 +34,7 @@ class Player(object):
         return True
 
     # Display all the cards in the players hand
-    def displayHand(self):
+    def display_hand(self):
         print ("{}'s hand: {}".format(self.name, self.hand))
         return self
 
@@ -42,8 +42,8 @@ class Player(object):
         return self.hand.pop()
 
 
-myDeck = Deck()
-myDeck.shuffle()
+my_deck = Deck()
+my_deck.shuffle()
 
 obj = Player("Gursheesh")
 obj.sayHello()
