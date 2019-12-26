@@ -1,0 +1,39 @@
+{"Rice" :[ 
+    {
+    "name" : "Basmati", 
+    "weigh" : 12, 
+    "price" : 1500
+    },
+
+    {
+    "name" : "Brown", 
+    "weight" : 10, 
+    "price" : 2500
+    }
+    ],
+"Pulse" :[
+    {
+    "name" : "kidney_beans", 
+    "weight" : 5, 
+    "price" : 500
+    },
+    {
+    "name" : "green_lentils", 
+    "weight" : 3, 
+    "price" : 300
+    }
+    ],
+
+"Wheat" :[
+    {
+    "name" : "common_wheat", 
+    "weight" : 8, 
+    "price" : 700
+    },
+    {
+    "name" : "spelt", 
+    "weight" : 7, 
+    "price" : 450
+    }
+    ]
+}
