@@ -92,14 +92,18 @@ if __name__ == '__main__' :
     else:
         
         #appending a new user into the file
-        f = open("newUser.json","a+")
+        f = open("newUser.json","w")
+        dict1 = {}
        
-        name = input("Enter the Name: ")
-        Age = int(input("Enter the Age: "))
-        phnum = int(input("Enter your Mobile Number: "))
-        amount = int(input("Enter the Amount for Shares: "))
-        cont = f.write(' [{'+'     "Name" : "'+ name +'",\n' + '        "Age"  : "'+str(Age)+'",\n'+'       "Ph.No" : "'+str(phnum)+'",\n'+'"Share Amount" : "'+str(amount)+'" }]\n'+''         )
+        dict1["name"] = input("Enter the Name: ")
+        dict1["age"] = int(input("Enter the Age: "))
+        dict1["ph num"] = int(input("Enter your Mobile Number: "))
+        dict1["amount"] = int(input("Enter the Amount for Shares: "))
+        print(dict1)
+        
         #data is being added to the json file
+        json.dump(dict1, f)
+        
         print("The Data has been Stored Successfully in 'newUser.json' file. ")
     #closing the file after use
     file.close()
