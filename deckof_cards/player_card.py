@@ -10,31 +10,39 @@ try:
     from deck import Deck
 
 except ImportError:
+    
     print("Error while Importing")  
 
 
 class Player(object):
     def __init__(self, name):
+        
         self.name = name
         self.hand = []
 
     def say_hello(self):
+       
         print ("I am {}".format(self.name))
         return self
 
    
     # Returns true in n cards are drawn, false if less then that
     def draw(self, deck, num=1):
+      
         for _ in range(num):
             card = deck.deal()
+          
             if card:
                 self.hand.append(card)
+          
             else: 
                 return False
+       
         return True
 
     # Display all the cards in the players hand
     def display_hand(self):
+       
         print ("{}'s hand: {}".format(self.name, self.hand))
         return self
 

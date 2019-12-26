@@ -24,14 +24,19 @@ class Card(object):
         return self.display()
         
     def display(self):
+       
         if self.value == 1:
             val = "Ace"
+       
         elif self.value == 11:
             val = "Jack"
+       
         elif self.value == 12:
             val = "Queen"
+       
         elif self.value == 13:
             val = "King"
+       
         else:
             val = self.value
         
