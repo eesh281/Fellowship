@@ -1,0 +1,29 @@
+{"Stock_name":[
+    {
+    "comp_name" : "RELIANCE",
+    "numof_share" : 25,
+    "price" : 1000
+    },
+
+    {
+    "comp_name" : "WIPRO",
+    "numof_share" : 15,
+    "price" : 900
+    },
+    {
+    "comp_name" : "TITAN",
+    "numof_share" : 18,
+    "price" : 500
+    },
+    {
+    "comp_name" : "TATASTEEL",
+    "numof_share" : 45,
+    "price" : 2500
+    },
+    {
+    "comp_name" : "TCS",
+    "numof_share" : 9,
+    "price" : 600
+    }
+    ]
+}
