@@ -8,12 +8,14 @@
 import json
 
 #creating a class for performing inventory object
-class Json_Inventory:
+class JsonInventory:
     
     #creating a method named json_inventory
     def json_inventory(self):
+        
         #opening the json file with reading permission and closing it after use
-        with open("/home/user/Desktop/newfolder/Fellowship/json/json_file.json","r") as file:
+        with open("/home/user/Desktop/newfolder/Fellowship/json_invent/json_file.json","r") as file:
+           
             data_read_dict = json.load(file)
             
             #storing the key values of the dict
@@ -44,15 +46,18 @@ class Json_Inventory:
             print(f"The price of rice is {rice_price}.\nThe price of wheat is {wheat_price}.\nThe price of Pulse is {pulse_price}. ")
             
             #outputing json object as string
-            json_str = json.dumps("/home/user/Desktop/newfolder/Fellowship/json/output_jason.json")
+            json_str = json.dumps("/home/user/Desktop/newfolder/Fellowship/json_invent/output_jason.json")
+            
             #opening file with writing permission and closing it after use
-            with open("/home/user/Desktop/newfolder/Fellowship/json/output_jason.json","w") as out_file:
+            with open("/home/user/Desktop/newfolder/Fellowship/json_invent/output_jason.json","w") as out_file:
+               
                 #writing json objuect to file
                 json.dump(data_read_dict, out_file, indent=3)
+            
             print(json_str)
 
 
-b = Json_Inventory()
+b = JsonInventory()
 b.json_inventory()
 
 
