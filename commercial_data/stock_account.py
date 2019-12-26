@@ -88,11 +88,10 @@ if __name__ == '__main__' :
                 obj1.stock_details()
             
             
-      
     else:
         
         #appending a new user into the file
-        f = open("newUser.json","w")
+        f = open("/home/user/Desktop/newfolder/Fellowship/commercial_data/newUser.json","w")
         dict1 = {}
        
         dict1["name"] = input("Enter the Name: ")
