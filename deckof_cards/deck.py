@@ -4,10 +4,14 @@
 #@author:Gursheesh Kour
 #*********************************************************************************************************
 
+try:
+    #importing required modules
+    import random
+    from cards import Card
 
-#importing required modules
-import random
-from cards import Card
+except ImportError:
+    print("Error while Importing")  
+
 
 class Deck(object):
     def __init__(self):
