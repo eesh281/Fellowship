@@ -1,21 +1,21 @@
+{% load static %}
 <html>
     <head>
         <title>login.page</title>
-        <link rel="stylesheet" type>
+        <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
     </head>
     <body>
         <h1>Login Page</h1>
         <form>
-            Username:<br>
-            <input class="user" type= "text" name = "user name">
+            <div>Username:</div> 
+            <input id="user" type= "text" name = "user name">
             <br>
-            Password:<br>
+            <div>Password:</div>
             <input id="pass" type = "text" name = "password">
             <br><br>
             <input id="submit" type="submit" value="submit">
             
             
-
         </form>
     </body>
 </html>

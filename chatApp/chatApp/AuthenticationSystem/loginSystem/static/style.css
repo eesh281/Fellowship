@@ -1,0 +1,26 @@
+body {
+
+    background-color: grey;
+    text-align: center;
+    position: sticky;
+    padding-top: 200px;
+    font-style: oblique
+}
+h1 {
+    font-size:50 ; font: oblique; color: rgb(148, 43, 43)
+}
+div {
+    font-size: 20
+}
+#pass{
+    font-size:20; color: rgb(37, 35, 35)
+}
+div {
+    font-size: 20
+}
+#user{
+    font-size:20; color:  rgb(37, 35, 35)
+}
+#submit{
+    font-size:18; color: black
+}
