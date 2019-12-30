@@ -7,10 +7,10 @@ body {
     font-style: oblique
 }
 h1 {
-    font-size:50 ; font: oblique; color: rgb(148, 43, 43)
+    font-size:50 ; font-style: italic; color: rgb(122, 34, 12)
 }
 div {
-    font-size: 20
+    font-size: 100
 }
 #pass{
     font-size:20; color: rgb(37, 35, 35)
