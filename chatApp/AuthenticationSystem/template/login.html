@@ -7,7 +7,7 @@
     
     <body>
         <h1>Login Page</h1>
-        <form>
+        <form method= "Post" >
             <div>Username:</div> 
             <input id="user" type= "text" name = "user name">
             <br>
@@ -15,16 +15,17 @@
             <input id="pass" type = "text" name = "password">
             <br><br>
             
-            <button onclick="location.href = '//www.youtube.com/watch';" id="button" >Submit</button>
+            <button onclick="myFunction()" id="button" >Submit</button>
             
         </form>
     </body>
 
-        {% comment %} <script>
+        <script>
         function myFunction(){
             location.replace("https://www.youtube.com/watch?v=zrXOjWICmGw")
         }
-        </script> {% endcomment %}
-    <a href="#">Register!</a><br>    
+        </script> 
+
+    <a href="/registration">Register!</a><br>    
     <a href="#">Forgot password?</a>
 </html>
