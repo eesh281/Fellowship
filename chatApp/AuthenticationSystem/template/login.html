@@ -4,6 +4,7 @@
         <title>login.page</title>
         <link rel = "stylesheet" type="text/css" href="{% static 'styles/style.css' %}"/>
     </head>
+    
     <body>
         <h1>Login Page</h1>
         <form>
@@ -13,9 +14,17 @@
             <div>Password:</div>
             <input id="pass" type = "text" name = "password">
             <br><br>
-            <input id="submit" type="submit" value="submit">
             
+            <button onclick="location.href = '//www.youtube.com/watch';" id="button" >Submit</button>
             
         </form>
     </body>
+
+        {% comment %} <script>
+        function myFunction(){
+            location.replace("https://www.youtube.com/watch?v=zrXOjWICmGw")
+        }
+        </script> {% endcomment %}
+    <a href="#">Register!</a><br>    
+    <a href="#">Forgot password?</a>
 </html>
