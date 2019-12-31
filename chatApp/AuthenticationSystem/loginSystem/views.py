@@ -2,17 +2,26 @@ from django.shortcuts import render
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
+from rest_framework.generics import GenericAPIView
+from rest_framework.permissions import IsAuthenticated
 
-def login(request):
-    return render(request,'login.html',{})
+# def login(request):
+#     return render(request,'login.html',{})
                                                                                                                                                                                        
 def registration(request):
     return render(request,'registration.html',{})
 
-def user_login(request):
-    if request.method == 'POST':
-        username = request.POST.get('user')
-        password = request.POST.get('pswd')
+class Login(GenericAPIView):
+
+    serializer_class = LoginSerializer
+
+    def get(self, request):
+        return render(request, 'login.html')
+
+    def post(self, request):
+        # if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
         user = authenticate(username=username, password=password)
         if user:
             if user.is_active:
@@ -24,8 +33,9 @@ def user_login(request):
             print("Failed, Not the Registered username or password")
             print("They used username: {} and password: {}".format(username,password))
             return HttpResponse("Invalid login details given")
-    else:
-        return render(request, 'login.html', {})
+
+
+        
 
 def user_registration(request):
     if request.method == 'POST':

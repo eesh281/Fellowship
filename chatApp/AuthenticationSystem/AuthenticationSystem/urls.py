@@ -19,9 +19,12 @@ from loginSystem.views import login, registration
 from loginSystem.views import user_login
 
 urlpatterns = [
-    url(r'^registration/$', registration, name='registration'),
-    url(r'^login/$', login, name='login'),
+    # url(r'^registration/$', registration, name='registration'),
+    # url(r'^login/$', login, name='login'),
     url(r'^admin/', admin.site.urls),
+    path('', include(loginSystem.urls)),
     url(r'^user_login/$',user_login, name='user_login'),
+    path('api/token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
 ]
 
