@@ -4,12 +4,13 @@ from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 from rest_framework.generics import GenericAPIView
 from rest_framework.permissions import IsAuthenticated
-
-# def login(request):
-#     return render(request,'login.html',{})
-                                                                                                                                                                                       
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from .serializers import EmailSerializer,LoginSerializer, RegistrationSerializer
 def registration(request):
+    
     return render(request,'registration.html',{})
+
 
 class Login(GenericAPIView):
 
@@ -35,56 +36,31 @@ class Login(GenericAPIView):
             return HttpResponse("Invalid login details given")
 
 
-        
+class Register(GenericAPIView):
 
-def user_registration(request):
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)
-            login(request, user)
-            return redirect('home')
-    else:
-        form = UserCreationForm()
-    return render(request, 'registration.html', {})
+    serializer_class = RegistrationSerializer
+    
+    def get(self, request):
+        return render(request, 'registration.html')
+        
+    def post(self, request):
+        if request.method == 'POST':
+            form = UserCreationForm(request.POST)
+            if form.is_valid():
+                form.save()
+                username = form.cleaned_data.get('username')
+                raw_password = form.cleaned_data.get('password')
+                user = authenticate(username=username, password=raw_password)
+                login(request, user)
+                return redirect('home')
+        else:
+            form = UserCreationForm()
+        return render(request, 'registration.html', {})
+                    
+
                 
 
-                
-# class Login(GenericAPIView):
-    
-#     serializer_class = LoginSerializer
-
-#     def get(self, request):
-#         return render(request, 'users/login.html')
-    
-#     def post(self, request, *args, **kwargs):
-#         if not request.data:
-#             return Response({'Error': "Please provide username/password"}, status="400")
-        
-#         username = request.POST.get('username')
-#         password = request.POST.get('password')
-#         user = auth.authenticate(username=username, password=password)
-
-#         if user:
-#             login(request, user)
-#             # payload = {
-#             #     'id': user.id,
-#             #     'email': user.email,
-#             # }
-#             # jwt_token = {'token': jwt.encode(payload, "SECRET_KEY").decode('utf-8')}
-            
-#             # messages.success(request, jwt_token)
-#             return render(request,'users/profile.html')
-#         else:
-#             return Response(
-#               json.dumps({'Error': "Invalid credentials"}),
-#               status=400,
-#               content_type="application/json"
-#             )
-# class Registr ation(GenericAPIView):
+# class Registration(GenericAPIView):
     
 #     serializer_class = ResgistrationSerializer
     
