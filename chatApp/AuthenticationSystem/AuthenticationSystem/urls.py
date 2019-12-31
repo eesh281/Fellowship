@@ -22,3 +22,4 @@ urlpatterns = [
     url(r'^login/$', login, name='login'),
     url(r'^admin/', admin.site.urls),
 ]
+
