@@ -1,4 +1,5 @@
 {% load static %}
+<!DOCTYPE HTML>
 <html>
     <head>
         <title>Register</title>
@@ -7,16 +8,17 @@
     <body>
         <h1>Register</h1>
         <h2>Fill your details below to Register</h2>
-        <form>
-                <div>Full Name:</div> 
-                <input id="name" type= "text" name = "Full Name">
-                <br>
-                <div>Username:</div> 
-                <input id="user" type= "text" name = "User name">
-                <br>
-                <div>Email:</div>
-                <input id="email" type = "text" name = "email">
-                <br><br>
+        <form action=""  method="POST">
+            {% csrf_token %}
+            
+                <input type="text" name="name" placeholder="name" required> <br><br>
+                <input type="text" name="username" placeholder="username" required> <br><br>
+                <input type="text" name="email" placeholder="Email address" required> <br><br>
+                <input type="password" name="password1" placeholder="Password1" required> <br><br>
+                <input type="password" name="password2" placeholder="Password2" required> <br><br>
+
+                {% comment %} <br><input type="submit" name="" value="submit"> {% endcomment %}
+                
                 
                 <button onclick="location.href = '//www.youtube.com/watch';" id="button" >Submit</button>
                 
