@@ -17,11 +17,15 @@ from django.contrib import admin
 from django.urls import path,include,re_path
 from django.conf.urls import url
 from rest_framework_jwt.views import obtain_jwt_token
+from snippets import views
+from snippets.views import Login, Registrations
 
-# from project.snippets import urls
 urlpatterns = [
     path('admin/', admin.site.urls),
-        path('api-token-auth/', obtain_jwt_token),
-
-    # re_path('/',include('snippets.urls'))
+    path('api-token-auth/', obtain_jwt_token), 
+    path('api/token/', obtain_jwt_token), 
+    path('login/', views.Login.as_view(), name='login'),
+    path('register/', views.Registrations.as_view(), name='registration'),
+  
 ]
+
