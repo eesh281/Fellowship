@@ -12,7 +12,7 @@ from .serializers import EmailSerializer,LoginSerializer, RegistrationSerializer
 from django_short_url.views import get_surl
 from django_short_url.models import ShortURL
 from django.http import HttpResponse, HttpResponseRedirect , response
-
+from jwt import ExpiredSignatureError
 
 def home(request):
    
@@ -85,9 +85,9 @@ def activate(request, surl):
         messages.info(request, 'was not able to sent the email')
         return redirect('registration')
     
-    # except ExpiredSignatureError:
-    #     messages.info(request, 'activation link expired')
-    #     return redirect('registration')
+    except ExpiredSignatureError:
+        messages.info(request, 'activation link expired')
+        return redirect('registration')
     
     except Exception:
         messages.info(request, 'activation link expired')
