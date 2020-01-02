@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     #'djoser',
     'rest_framework_jwt',
+    'django_short_url',
 ]
 
 MIDDLEWARE = [
