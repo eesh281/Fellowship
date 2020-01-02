@@ -4,12 +4,14 @@ from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 from rest_framework.generics import GenericAPIView
 from rest_framework.permissions import IsAuthenticated
+from django.contrib import messages
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializers import EmailSerializer,LoginSerializer, RegistrationSerializer, UserSerializer
-from django.core.validators import validate_email
+#from django.core.validators import validate_email
 from django_short_url.views import get_surl
 from django_short_url.models import ShortURL
+from django.http import HttpResponse, HttpResponseRedirect , response
 
 
 def home(request):
@@ -78,12 +80,15 @@ def activate(request, surl):
         else:
             messages.info(request, 'was not able to sent the email')
             return redirect('registration')
+    
     except KeyError:
         messages.info(request, 'was not able to sent the email')
         return redirect('registration')
-    except ExpiredSignatureError:
-        messages.info(request, 'activation link expired')
-        return redirect('registration')
+    
+    # except ExpiredSignatureError:
+    #     messages.info(request, 'activation link expired')
+    #     return redirect('registration')
+    
     except Exception:
         messages.info(request, 'activation link expired')
         return redirect('registration')
