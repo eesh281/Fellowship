@@ -35,7 +35,7 @@ from django_short_url.views import get_surl
 from django_short_url.models import ShortURL
 from django.http import HttpResponse, HttpResponseRedirect , response
 from jwt import ExpiredSignatureError
-
+from project.settings import SECRET_KEY
 
 def home(request):
    
@@ -274,9 +274,42 @@ class Registrations(GenericAPIView):
     #     return redirect('registration')
 
 
+# def activate(request, surl):
+#     print("Activate url is ", surl)   
+#     return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
+#     if user_created is not None:
+#         user_created.is_active = True
+#         user_created.save()
+#         login(request, user_created)
+#         #return redirect('home')
+#         return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
+#     else:
+#         return HttpResponse('Activation link is invalid!')
+
+
 def activate(request, surl):
-    print("Activate url is ", surl)    
-    return HttpResponse('Thank you for your email confirmation. Now you can login your account.')        
+    print("Activate url is ", surl)   
+    try:
+        tokenobject = ShortURL.objects.get(surl=surl)
+        token = tokenobject.lurl
+        decode = jwt.decode(token, SECRET_KEY)
+        username = decode['username']
+        user = User.objects.get(username=username)
+        if user is not None:
+            user.is_active = True
+            user.save()
+            messages.info(request, "your account is active now")
+            return redirect('login')        
+        else:           
+            messages.info(request, 'was not able to sent the email')          
+            return redirect('registration')
+    
+
+
+    except KeyError:
+        messages.info(request, 'was not able to sent the email')
+        return redirect('registration')
+     
 
 # def activate(request, uidb64, token):
 #     try:
