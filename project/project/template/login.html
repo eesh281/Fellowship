@@ -29,12 +29,12 @@
         </script> 
 
     <a href="/registration">Register!</a><br>    
-    <a href="#">Forgot password?</a>
+    <a href="/forgotpassword">Forgot password?</a>
      <script>
             function validate(){
                 var username = document.forms["loginform"]["user"].value;
-                var password = document.forms["loginform"]["pswd"].value;
-                var passwordExpression = /[A-Z]{1}[a-zA-Z0-9]+[@#$_]+/;
+                var password = document.forms["loginform"]["password"].value;
+                {% comment %} var passwordExpression = /[A-Z]{1}[a-zA-Z0-9]+[@#$_]+/; {% endcomment %}
                 if (username=="" || password==""){
                     alert("Username/password cannot be empty")
                     return false;

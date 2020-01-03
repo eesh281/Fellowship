@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 import datetime
 import os
+import logging
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -136,6 +137,16 @@ REST_FRAMEWORK = {
     ),
 }
 
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+# EMAIL_PORT = os.getenv('EMAIL_PORT')
+
+formatter = logging.Formatter('%(levelname)s :%(asctime)s :%(pathname)s :%(lineno)s :%(thread)d  :%(threadName)s :%(process)d :%(message)s')
+file_handler = logging.FileHandler(filename='/home/user/Desktop/GitFolder/Fellowship/project/project.log')
+file_handler.setFormatter(formatter)
+
 
 JWT_AUTH = {
     'JWT_ENCODE_HANDLER':
@@ -172,3 +183,7 @@ JWT_AUTH = {
     'JWT_AUTH_COOKIE': None,
 
 }
+
+AUTH_ENDPOINT = os.getenv('AUTH_ENDPOINT')
+AUTH_ENDPOINT = "http://127.0.0.1:8000/api-token-auth/"
+    # path('api-token-auth/', obtain_jwt_token), 
