@@ -132,7 +132,7 @@ class Registrations(GenericAPIView):
             surl = get_surl(url)
             print(surl)
             z = surl.split("/")
-            print(z)
+            print("the z value is", z)
             print("z[2] line printed :", z[2])
             mail_subject = "Activate your account clicking on the link below"
             message = render_to_string('email_validation.html', {
@@ -141,8 +141,11 @@ class Registrations(GenericAPIView):
                     'surl': z[2]
                 })
             print(message)
+            email = EmailMessage(mail_subject, message, to=[email])
+            email.send()
+
             # send_mail(mail_subject, message, from_mail, to_list, fail_silently=True)
-            message.send()
+            # message.send()
             print('confirmation mail sent')
             return HttpResponse('Please confirm your email address to complete the registration')
 
@@ -269,19 +272,22 @@ class Registrations(GenericAPIView):
     # except Exception:
     #     messages.info(request, 'activation link expired')
     #     return redirect('registration')
-                    
 
-def activate(request, uidb64, token):
-    try:
-        uid = force_text(urlsafe_base64_decode(uidb64)).decode()
-        user = User.objects.get(pk=uid)
-    except(TypeError, ValueError, OverflowError, User.DoesNotExist):
-        user = None
-    if user is not None and account_activation_token.check_token(user, token):
-        user.is_active = True
-        user.save()
-        login(request, user)
-        # return redirect('home')
-        return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
-    else:
-        return HttpResponse('Activation link is invalid!')
+
+def activate(request, surl):
+    print(surl)            
+
+# def activate(request, uidb64, token):
+#     try:
+#         uid = force_text(urlsafe_base64_decode(uidb64)).decode()
+#         user = User.objects.get(pk=uid)
+#     except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+#         user = None
+#     if user is not None and account_activation_token.check_token(user, token):
+#         user.is_active = True
+#         user.save()
+#         login(request, user)
+#         # return redirect('home')
+#         return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
+#     else:
+#         return HttpResponse('Activation link is invalid!')
