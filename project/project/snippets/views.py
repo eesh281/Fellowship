@@ -6,14 +6,11 @@ from django.template.loader import render_to_string
 from validate_email import validate_email
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from django.contrib.auth import login, authenticate
 # from .forms import SignupForm
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.template.loader import render_to_string
-# from .tokens import account_activation_token
-from django.contrib.auth.models import User
+ # from .tokens import account_activation_token
 from django.core.mail import EmailMessage
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
@@ -28,7 +25,7 @@ from rest_framework.permissions import IsAuthenticated
 from django.contrib.sites.shortcuts import get_current_site
 from django.contrib import messages
 from rest_framework.views import APIView
-from project.settings import EMAIL_HOST_USER,file_handler
+from project.settings import EMAIL_HOST_USER
 from django.core.mail import send_mail
 from snippets.token import token_activation,token_validation,account_activation_token
 from rest_framework.response import Response
@@ -38,10 +35,7 @@ from django_short_url.views import get_surl
 from django_short_url.models import ShortURL
 from django.http import HttpResponse, HttpResponseRedirect , response
 from jwt import ExpiredSignatureError
-import logging
-logger = logging.getLogger(__name__)
-logger.setLevel(logging.DEBUG)
-logger.addHandler(file_handler)
+
 
 def home(request):
    
@@ -98,7 +92,8 @@ class Registrations(GenericAPIView):
 
         try:
             validate_email(email)
-        except validate_email.ValidationError:
+        except validate_email.ValidationError as e:
+            print('validate_email.ValidationError', e)
             messages.error(request, "Email id not valid")
             smd["success"] = False
             smd["message"] = "email"
@@ -120,8 +115,8 @@ class Registrations(GenericAPIView):
             
             user_created.save()
             # send_mail(subject, message, from_mail, to_list, fail_silently=True)
-            sub = 'Thank you for registering with fundoo notes'
-            msg = 'U can do lot many things with fundoo like create notes, set remainders and ../n Have FunDooing'
+            sub = 'Thank you for registering'
+            msg = 'Welcome to the Family'
             from_mail = "kour.gursheesh281@gmail.com"
             to_list = [user_created.email]
             send_mail(sub, msg, from_mail, to_list, fail_silently=True)
@@ -133,21 +128,26 @@ class Registrations(GenericAPIView):
             token = token_activation(username, password1)
             print('return from tokens.py:', token)
             url = str(token)
+            print('url is ',  url)
             surl = get_surl(url)
+            print(surl)
             z = surl.split("/")
-            print(z[2])
+            print(z)
+            print("z[2] line printed :", z[2])
             mail_subject = "Activate your account clicking on the link below"
             message = render_to_string('email_validation.html', {
                     'user': user_created.username,
                     'domain': domain,
                     'surl': z[2]
                 })
+            print(message)
             # send_mail(mail_subject, message, from_mail, to_list, fail_silently=True)
             message.send()
             print('confirmation mail sent')
             return HttpResponse('Please confirm your email address to complete the registration')
 
         except Exception as e:
+            print('Exception', e)
             messages.error(request, "user creation failed")
             smd["success"] = False
             smd["message"] = "last return"
@@ -273,7 +273,7 @@ class Registrations(GenericAPIView):
 
 def activate(request, uidb64, token):
     try:
-        uid = force_text(urlsafe_base64_decode(uidb64))
+        uid = force_text(urlsafe_base64_decode(uidb64)).decode()
         user = User.objects.get(pk=uid)
     except(TypeError, ValueError, OverflowError, User.DoesNotExist):
         user = None

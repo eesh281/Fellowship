@@ -143,9 +143,6 @@ EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 # EMAIL_PORT = os.getenv('EMAIL_PORT')
 
-formatter = logging.Formatter('%(levelname)s :%(asctime)s :%(pathname)s :%(lineno)s :%(thread)d  :%(threadName)s :%(process)d :%(message)s')
-file_handler = logging.FileHandler(filename='/home/user/Desktop/GitFolder/Fellowship/project/project.log')
-file_handler.setFormatter(formatter)
 
 
 JWT_AUTH = {
