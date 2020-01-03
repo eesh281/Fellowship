@@ -275,7 +275,8 @@ class Registrations(GenericAPIView):
 
 
 def activate(request, surl):
-    print(surl)            
+    print("Activate url is ", surl)    
+    return HttpResponse('Thank you for your email confirmation. Now you can login your account.')        
 
 # def activate(request, uidb64, token):
 #     try:

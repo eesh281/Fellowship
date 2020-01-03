@@ -28,9 +28,10 @@ urlpatterns = [
     path('api/token/', obtain_jwt_token), 
     path('login/', views.Login.as_view(), name='login'),
     path('register/', views.Registrations.as_view(), name='registration'),
-    path('activate/(?P<surl>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', views.activate, name='activate'),
+    path('activate/<slug:surl>/', views.activate, name='activate'),
     # url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
     #     views.activate_account, name='activate')
     #     (?P<surl>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$
+    # (?P<surl>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$
 ]
 
