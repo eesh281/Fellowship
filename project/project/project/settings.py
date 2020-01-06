@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'snippets',
     'rest_framework',
-    #'djoser',
     'rest_framework_jwt',
     'django_short_url',
 ]
@@ -136,6 +135,7 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.BasicAuthentication',
     ),
 }
+
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
