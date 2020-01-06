@@ -219,15 +219,13 @@ class ForgotPassword(GenericAPIView):
                         mail_subject = "Activate your account by clicking below link"
                         mail_message = render_to_string('reset_password_token.html', {
                             'user': username,
-                            'domain': 'reset_password.html',
+                            'domain': get_current_site(request).domain,
                             'surl': z[2]
                         })
                         recipientemail = email
                         
                         email = EmailMessage(mail_subject, mail_message, to=[recipientemail])
                         email.send()
-                        response = redirect('reset_password.html')
-
                         response = {
                             'success': True,
                             'message': "check email for vaildation ",
@@ -341,26 +339,26 @@ def reset_password(request, surl):
         user = User.objects.get(username=username)
 
         if user is not None:
-            context = {'userReset': user.username}
+            context = {'reset_password': user.username}
             print(context)
-            return redirect('/api/resetpassword/' + str(user))
+            return redirect('reset_password' + str(user))
         else:
             messages.info(request, 'was not able to sent the email')
-            return redirect('/api/forgotpassword')
+            return redirect('forgot_password')
     except KeyError:
         messages.info(request, 'was not able to sent the email')
-        return redirect('/api/forgotpassword')
+        return redirect('forgot_password')
     except Exception as e:
         print(e)
         messages.info(request, 'activation link expired')
-        return redirect('/api/forgotpassword')
+        return redirect('forgot_password')
 
 
 class ResetPassword(GenericAPIView):
     
     serializer_class = ResetPasswordSerializer
 
-    # @csrf_protect
+
     def post(self, request, user_reset):
         password = request.data['password']
 

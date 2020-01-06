@@ -11,7 +11,7 @@ ee = BaseEventEmitter()
 @ee.on('send_email')
 def send_email(recipientemail, mail_message):
 
-    subject, from_email, to = 'greeting from fundoo ', settings.EMAIL_HOST, recipientemail
+    subject, from_email, to = 'greeting', settings.EMAIL_HOST, recipientemail
     msg = EmailMultiAlternatives(subject, mail_message, from_email, [to])
     msg.attach_alternative(mail_message, "text/html")
     msg.send()
