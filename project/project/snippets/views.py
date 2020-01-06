@@ -178,70 +178,133 @@ class Registrations(GenericAPIView):
 #         except Exception:
 #             return HttpResponse(json.dumps(smd), status=400)
 
-
 class ForgotPassword(GenericAPIView):
-    
+ 
     serializer_class = EmailSerializer
 
     def get(self, request):
-        return render(request, 'forgot_password.html')
-        
-    def post(self, request, *args, **kwargs):
+        return render(request,'forgot_password.html')
+
+    def post(self, request):
 
         global response
-        # email = request.POST.get['email']
         email = request.data["email"]
-        response = {
+        smd = {
             'success': False,
             'message': "not a vaild email ",
             'data': []
         }
-        if email == "":
-            response['message'] = 'email field is empty please provide vaild input'
-            return HttpResponse(json.dumps(response), status=400)
-        else:
-            try:
-                validate_email(email)
-            except Exception:
-                return HttpResponse(json.dumps(response) ,status=400)
-            try:
-                user = User.objects.filter(email=email)
-                useremail = user.values()[0]["email"]
-                username = user.values()[0]["username"]
-                print(useremail)
-                print(useremail)
-                print(user)
+        try:
+            if email == "":
+                response = 'email field is empty please provide vaild input'
+            else:
+
+                try:
+                    validate_email(email)
+                except Exception:
+                    return HttpResponse(json.dumps(smd))
+                try:
+                    print(email)
+                    user = User.objects.filter(email=email)
+                    useremail = user.values()[0]["email"]
+                    username = user.values()[0]["username"]
+                    id = user.values()[0]["id"]
+
+                    if useremail is not None:
+                        token = token_activation(username, id)
+                        url = str(token)
+                        surl = get_surl(url)
+                        z = surl.split("/")
+
+                        mail_subject = "Activate your account by clicking below link"
+                        mail_message = render_to_string('reset_password_token.html', {
+                            'user': username,
+                            'domain': 'reset_password.html',
+                            'surl': z[2]
+                        })
+                        recipientemail = email
+                        
+                        email = EmailMessage(mail_subject, mail_message, to=[recipientemail])
+                        email.send()
+                        response = redirect('reset_password.html')
+
+                        response = {
+                            'success': True,
+                            'message': "check email for vaildation ",
+                            'data': []
+                        }
+
+                except Exception as e:
+                    response = smd['message'] = "not a registered user",
+        except Exception:
+            smd['message'] = "not a registered user",
+
+        return HttpResponse(json.dumps(response))
+
+
+# class ForgotPassword(GenericAPIView):
+    
+#     serializer_class = EmailSerializer
+
+#     def get(self, request):
+#         return render(request, 'forgot_password.html')
+        
+#     def post(self, request):
+        
+#         global response
+#         #email = request.POST.get["email"]
+#         email = self.request.GET.get("email")
+#         smd = {
+#             'success': False,
+#             'message': "not a vaild email ",
+#             'data': []
+#         }
+#         if email == "":
+#             response['message'] = 'email field is empty please provide vaild input'
+#             return HttpResponse(json.dumps(response), status=400)
+#         else:
+#             try:
+#                 validate_email(email)
+#             except Exception:
+#                 return HttpResponse(json.dumps(response) ,status=400)
+#             try:
+#                 user = User.objects.filter(email=email)
+#                 useremail = user.values()[0]["email"]
+#                 username = user.values()[0]["username"]
+#                 print(useremail)
+#                 print(useremail)
+#                 print(user)
                 
 
-                if useremail is not None:
-                    token = token_activation(useremail,username)
-                    url = str(token)
-                    surl = get_surl(url)
-                    z = surl.split("/")
+#                 if useremail is not None:
+#                     token = token_activation(useremail,username)
+#                     url = str(token)
+#                     surl = get_surl(url)
+#                     z = surl.split("/")
 
-                    mail_subject = "Activate your account by clicking below link"
-                    mail_message = render_to_string('email_validation.html', {
-                        'user': username,
-                        'domain': get_current_site(request).domain,
-                        'surl': z[2]
-                    })
-                    recipientemail = email
-                    subject, from_email, to = 'greetings', "kour.gursheesh281@gmail.com", recipientemail
-                    msg = EmailMultiAlternatives(subject, mail_message, from_email, [to])
-                    msg.attach_alternative(mail_message, "text/html")
-                    msg.send()
-                    ee.emit('send_email', recipientemail, mail_message)
-                    response = {
-                        'success': True,
-                        'message': "check email for resetting password ",
-                        'data': []
-                        }      
-                    return render(request, 'reset_password.html')
+#                     mail_subject = "Activate your account by clicking below link"
+#                     mail_message = render_to_string('email_validation.html', {
+#                         'user': username,
+#                         'domain': get_current_site(request).domain,
+#                         'surl': z[2]
+#                     })
+#                     recipientemail = email
+#                     subject, from_email, to = 'greetings', "kour.gursheesh281@gmail.com", recipientemail
+#                     msg = EmailMultiAlternatives(subject, mail_message, from_email, [to])
+#                     msg.attach_alternative(mail_message, "text/html")
+#                     msg.send()
+#                     ee.emit('send_email', recipientemail, mail_message)
+#                     response = {
+#                         'success': True,
+#                         'message': "check email for resetting password ",
+#                         'data': []
+#                         }      
+#                     return render(request, 'reset_password.html')
 
-                    return HttpResponse(json.dumps(response), status=201)
-            except Exception as e:
-                response['message'] = "something went wrong"
-                return HttpResponse(json.dumps(response), status=400)
+#                 return HttpResponse(json.dumps(response), status=201)
+#             except Exception as e:
+#                 response['message'] = "something went wrong"
+#                 return HttpResponse(json.dumps(response), status=400)
 
 
 def activate(request, surl):
