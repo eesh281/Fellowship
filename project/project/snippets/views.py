@@ -145,6 +145,7 @@ class Registrations(GenericAPIView):
                     'surl': z[2]
                 })
             print(message)
+            
             email = EmailMessage(mail_subject, message, to=[email])
             email.send()
 
@@ -153,11 +154,13 @@ class Registrations(GenericAPIView):
             return HttpResponse('Please confirm your email address to complete the registration')
 
         except Exception as e:
+           
             print('Exception', e)
             messages.error(request, "user creation failed")
             smd["success"] = False
             smd["message"] = "last return"
             return HttpResponse(json.dumps(smd), status=400)
+
 
 # class Logout(GenericAPIView):
 #     serializer_class = LoginSerializer
