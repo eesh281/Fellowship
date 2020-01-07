@@ -50,7 +50,7 @@ class Login(GenericAPIView):
     serializer_class = LoginSerializer
 
     def get(self, request):
-        return render(request, 'login.html')
+        return render(request, 'user/login.html')
 
     def post(self, request):
         username = request.POST.get('username')
@@ -59,7 +59,7 @@ class Login(GenericAPIView):
         if user:
             if user.is_active:
                 login(request,user)
-                return HttpResponse("Your account was active.")
+                return redirect('chat/chat')
             else:
                 return HttpResponse("Your account was inactive.")
         else:
@@ -74,7 +74,7 @@ class Registrations(GenericAPIView):
     serializer_class = UserSerializer
 
     def get(self, request):
-        return render(request, 'registration.html')
+        return render(request, 'user/registration.html')
         
     def post(self, request, *args, **kwargs):        
         name = request.POST.get('name')
@@ -139,7 +139,7 @@ class Registrations(GenericAPIView):
             print("the z value is", z)
             print("z[2] line printed :", z[2])
             mail_subject = "Activate your account clicking on the link below"
-            message = render_to_string('email_validation.html', {
+            message = render_to_string('user/email_validation.html', {
                     'user': user_created.username,
                     'domain': domain,
                     'surl': z[2]
@@ -183,7 +183,7 @@ class ForgotPassword(GenericAPIView):
     serializer_class = EmailSerializer
 
     def get(self, request):
-        return render(request,'forgot_password.html')
+        return render(request,'user/forgot_password.html')
 
     def post(self, request):
 
@@ -217,7 +217,7 @@ class ForgotPassword(GenericAPIView):
                         z = surl.split("/")
 
                         mail_subject = "Activate your account by clicking below link"
-                        mail_message = render_to_string('reset_password_token.html', {
+                        mail_message = render_to_string('user/reset_password_token.html', {
                             'user': username,
                             'domain': get_current_site(request).domain,
                             'surl': z[2]
@@ -317,15 +317,15 @@ def activate(request, surl):
             user.is_active = True
             user.save()
             messages.info(request, "your account is active now")
-            return redirect('login')        
+            return redirect('user/login')        
         else:           
             messages.info(request, 'was not able to sent the email')          
-            return redirect('registration')
+            return redirect('user/registration')
     
 
     except KeyError:
         messages.info(request, 'was not able to sent the email')
-        return redirect('registration')
+        return redirect('user/registration')
      
     
 def reset_password(request, surl):
@@ -341,17 +341,17 @@ def reset_password(request, surl):
         if user is not None:
             context = {'reset_password': user.username}
             print(context)
-            return redirect('reset_password' + str(user))
+            return redirect('user/reset_password' + str(user))
         else:
             messages.info(request, 'was not able to sent the email')
-            return redirect('forgot_password')
+            return redirect('user/forgot_password')
     except KeyError:
         messages.info(request, 'was not able to sent the email')
-        return redirect('forgot_password')
+        return redirect('user/forgot_password')
     except Exception as e:
         print(e)
         messages.info(request, 'activation link expired')
-        return redirect('forgot_password')
+        return redirect('user/forgot_password')
 
 
 class ResetPassword(GenericAPIView):
@@ -400,4 +400,4 @@ class ResetPassword(GenericAPIView):
 
 def session(request):
   
-    return render(request, 'session.html')
+    return render(request, 'user/session.html')

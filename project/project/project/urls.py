@@ -14,6 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.contrib.auth.views import LogoutView
 from django.urls import path,include,re_path
 from django.conf.urls import url
 from rest_framework_jwt.views import obtain_jwt_token
@@ -21,20 +22,29 @@ from snippets import views
 from snippets.views import Login, Registrations, activate, ForgotPassword, reset_password,ResetPassword,session
 from django_short_url.views import get_surl
 from django_short_url.models import ShortURL
+from chatApp.views import message_list, user_list, chat_view, message_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-token-auth/', obtain_jwt_token), 
     path('api/token/', obtain_jwt_token), 
-    path('login/', views.Login.as_view(), name='login'),
-    path('activate/<slug:surl>/', views.activate, name='activate'),
-    path('registration/', views.Registrations.as_view(), name="registration"),
+    path('login/', Login.as_view(), name='login'),
+    path('activate/<slug:surl>/', activate, name='activate'),
+    path('registration/', Registrations.as_view(), name="registration"),
 
-    path('forgot_password/', views.ForgotPassword.as_view(),name="forgot_Password"),
-    # path('activate/<surl>/', views.activate, name="activate"),
-    path('reset_password/<slug:surl>/', views.reset_password, name="reset_password"),
-    path('resetpassword/<user_reset>', views.ResetPassword.as_view(), name="resetpassword"),
+    path('login/chat/chat/',chat_view, name='chats'),
+    path('chat/<int:sender>/<int:receiver>', message_view, name='chat'),
+    path('api/messages/<int:sender>/<int:receiver>', message_list, name='message-detail'),  
+    path('api/messages/', message_list, name='message-list'),   
+    path('api/users/<int:pk>', user_list, name='user-detail'),      
+    path('api/users/', user_list, name='user-list'),   
+
+    path('forgot_password/', ForgotPassword.as_view(),name="forgot_Password"),
+    path('reset_password/<slug:surl>/', reset_password, name="reset_password"),
+    path('resetpassword/<user_reset>', ResetPassword.as_view(), name="resetpassword"),
     # path('logout/', views.Logout.as_view() ,name="logout"),
-    path('session/', views.session),   
+    path('logout', LogoutView.as_view(next_page='index'), name='logout'),
+    path('session/', session),   
+
 ]
 
