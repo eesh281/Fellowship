@@ -49,21 +49,16 @@ def message_list(request, sender=None, receiver=None):
 
 
 def chat_view(request):
- 
-    def get(self, request):
-        return render(request, 'user/login.html')
-
-    def post(self, request):
-        username = request.POST.get('username')
-        user = authenticate(username=username)
-        if not user.is_authenticated:
-            return redirect('user/login')
-        return redirect('chat/chat')
+    if not request.user.is_authenticated:
+        return redirect('login')
+    if request.method == "GET" :
+        return render(request, 'chat/chat.html',
+                      {'users': User.objects.exclude(username=request.user.username)})
 
 
 def message_view(request, sender, receiver):
     if not request.user.is_authenticated:
-        return redirect('user/login')
+        return redirect('login')
     if request.method == "GET":
         return render(request, "chat/messages.html",
                       {'users': User.objects.exclude(username=request.user.username),
