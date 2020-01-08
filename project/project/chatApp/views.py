@@ -7,25 +7,12 @@ from chatApp.serializers import MessageSerializer, UserSerializer
 from django.shortcuts import render, redirect
 
 
-# def index(request):
-#     if request.user.is_authenticated:
-#         return redirect('chats')
-#     if request.method == 'GET':
-#         return render(request, 'user/index.html', {})
-#     if request.method == "POST":
-#         username, password = request.POST['username'], request.POST['password']
-#         user = authenticate(username=username, password=password)
-#         print(user)
-#         if user is not None:
-#             login(request, user)
-#         else:
-#             return HttpResponse('{"error": "User does not exist"}')
-#         return redirect('chats')
 
 
 @csrf_exempt
-def user_list(request, pk=None):
-
+def user_list(request,pk=None):
+    # import pdb
+    # pdb.set_trace()
     if request.method == 'GET':
         if pk:
             users = User.objects.filter(id=pk)
@@ -45,8 +32,8 @@ def user_list(request, pk=None):
 
 
 @csrf_exempt
-def message_list(request, sender=None, receiver=None):
-
+def message_list(request, sender, receiver):
+    
     if request.method == 'GET':
         messages = Message.objects.filter(sender_id=sender, receiver_id=receiver, is_read=False)
         serializer = MessageSerializer(messages, many=True, context={'request': request})
@@ -63,10 +50,9 @@ def message_list(request, sender=None, receiver=None):
             return JsonResponse(serializer.data, status=201)
         return JsonResponse(serializer.errors, status=400)
 
-
 def chat_view(request):
     if not request.user.is_authenticated:
-        return redirect('index')
+        return redirect('user/index')
     if request.method == "GET" :
         return render(request, 'chat/chat.html',
                       {'users': User.objects.exclude(username=request.user.username)})
@@ -74,7 +60,7 @@ def chat_view(request):
 
 def message_view(request, sender, receiver):
     if not request.user.is_authenticated:
-        return redirect('index')
+        return redirect('user/index')
     if request.method == "GET":
         return render(request, "chat/message.html",
                       {'users': User.objects.exclude(username=request.user.username),

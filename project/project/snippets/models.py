@@ -1,4 +1,5 @@
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+from django.core.cache import cache 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
 from django.db import models
 from django import forms
 
@@ -12,5 +13,6 @@ class Registration(models.Model):
     if fullname == "" or username == "" or email == "" or password == "":
         raise forms.ValidationError(" one of the above field is empty")
 
-    # def __str__(self):
-    #     return self.username
+    def __str__(self):
+        return self.id
+

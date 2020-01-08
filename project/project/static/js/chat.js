@@ -54,6 +54,7 @@ function getUsers(senderId, callback) {
                 if (user.id === senderId) {
                     return res
                 } else {
+                   
                     return [userDiv(senderId, user.id, user.username, user.online), ...res]
                 }
             }, [])

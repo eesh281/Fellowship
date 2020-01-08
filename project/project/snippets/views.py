@@ -50,7 +50,7 @@ class Login(GenericAPIView):
     serializer_class = LoginSerializer
 
     def get(self, request):
-        return render(request, 'user/login.html')
+        return render(request, 'user/index.html')
 
     def post(self, request):
         username = request.POST.get('username')
@@ -317,7 +317,7 @@ def activate(request, surl):
             user.is_active = True
             user.save()
             messages.info(request, "your account is active now")
-            return redirect('user/login')        
+            return redirect('user/index')        
         else:           
             messages.info(request, 'was not able to sent the email')          
             return redirect('user/registration')

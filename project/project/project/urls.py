@@ -33,7 +33,7 @@ urlpatterns = [
     path('registration/', Registrations.as_view(), name="registration"),
 
     path('chat/',chat_view, name='chats'),
-    path('chat/<int:sender>/<int:receiver>', message_view, name='chat'),
+    path('chat/<int:sender>/<int:receiver>/', message_view, name='chat'),
     path('api/messages/<int:sender>/<int:receiver>', message_list, name='message-detail'),  
     path('api/messages/', message_list, name='message-list'),   
     path('api/users/<int:pk>', user_list, name='user-detail'),      

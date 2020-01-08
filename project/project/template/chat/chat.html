@@ -1,8 +1,9 @@
 {% extends 'user/index.html' %}
 {% block body %}
-{% load staticfiles %}
-<nav class="blue lighten-3">
-    <div class="nav-wrapper container">
+{% load staticfiles %} 
+
+<nav class="purple">
+    {% comment %} <div class="nav-wrapper container"> {% endcomment %}
       <a href="#" class="brand-logo">Chat</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
           <li><a href="">{{ request.user.username }}</a></li>
@@ -48,23 +49,27 @@
         // For receiving
         sender_id = "{{ receiver.id }}";
         receiver_id = "{{ request.user.id }}";
-
+        
         //For sending
         $(function () {
             scrolltoend();
             $('#chat-box').on('submit', function (event) {
                 event.preventDefault();
+                
                 var message = $('#id_message');
                 send('{{ request.user.username }}', '{{ receiver.username }}', message.val());
                 message.val('');
+                
             })
             setInterval(() => {
                 getUsers({{ request.user.id }}, doc => {
                     let list = ''
+                    
                     doc.map(userItem => {
                         list += userItem
                     })
                     $('#users').html(list)
+            
                 });
             }, 1000)
         })        
