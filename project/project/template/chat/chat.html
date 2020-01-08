@@ -1,5 +1,6 @@
-{% comment %} {% extends 'user/login.html' %} {% endcomment %}
-{% comment %} {% block body %} {% endcomment %}
+{% extends 'user/index.html' %}
+{% block body %}
+{% load staticfiles %}
 <nav class="blue lighten-3">
     <div class="nav-wrapper container">
       <a href="#" class="brand-logo">Chat</a>
@@ -47,6 +48,7 @@
         // For receiving
         sender_id = "{{ receiver.id }}";
         receiver_id = "{{ request.user.id }}";
+
         //For sending
         $(function () {
             scrolltoend();
@@ -66,6 +68,7 @@
                 });
             }, 1000)
         })        
+
         
     </script>
-{% comment %} {% endblock %} {% endcomment %}
+{% endblock %}

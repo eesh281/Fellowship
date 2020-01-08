@@ -59,7 +59,7 @@ class Login(GenericAPIView):
         if user:
             if user.is_active:
                 login(request,user)
-                return redirect('chat/chat')
+                return redirect('chats')
             else:
                 return HttpResponse("Your account was inactive.")
         else:
@@ -80,7 +80,7 @@ class Registrations(GenericAPIView):
         name = request.POST.get('name')
         username = request.POST.get('username')
         email = request.POST.get('email')
-        password1 = request.POST.get('password1')
+        password = request.POST.get('password')
         password2 = request.POST.get('password2')
 
         smd = {
@@ -89,9 +89,9 @@ class Registrations(GenericAPIView):
             'data': [],
         }
 
-        if username == "" or name == "" or email == "" or password1 == "" or password2 == "":
+        if username == "" or name == "" or email == "" or password == "" or password2 == "":
             messages.warning(request, "Fields cannot be empty")
-        elif password1 != password2:
+        elif password != password2:
             messages.warning(request, "password fields not matching")
 
         try:
@@ -114,7 +114,7 @@ class Registrations(GenericAPIView):
 
         try:
             user_created = User.objects.create_user(username=username, email=email, 
-                                                    password=password1,
+                                                    password=password,
                                                     is_active=False)
             
             user_created.save()
@@ -129,7 +129,7 @@ class Registrations(GenericAPIView):
             domain = current_site.domain 
             print(current_site)
             print('domain:', domain)                
-            token = token_activation(username, password1)
+            token = token_activation(username, password)
             print('return from tokens.py:', token)
             url = str(token)
             print('url is ',  url)

@@ -2,9 +2,25 @@ from django.contrib.auth.models import User
 from django.http.response import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
-from chatApp.models import Message                                                   
+from chatApp.models import Message, UserProfile                                                
 from chatApp.serializers import MessageSerializer, UserSerializer 
 from django.shortcuts import render, redirect
+
+
+# def index(request):
+#     if request.user.is_authenticated:
+#         return redirect('chats')
+#     if request.method == 'GET':
+#         return render(request, 'user/index.html', {})
+#     if request.method == "POST":
+#         username, password = request.POST['username'], request.POST['password']
+#         user = authenticate(username=username, password=password)
+#         print(user)
+#         if user is not None:
+#             login(request, user)
+#         else:
+#             return HttpResponse('{"error": "User does not exist"}')
+#         return redirect('chats')
 
 
 @csrf_exempt
@@ -50,7 +66,7 @@ def message_list(request, sender=None, receiver=None):
 
 def chat_view(request):
     if not request.user.is_authenticated:
-        return redirect('login')
+        return redirect('index')
     if request.method == "GET" :
         return render(request, 'chat/chat.html',
                       {'users': User.objects.exclude(username=request.user.username)})
@@ -58,9 +74,9 @@ def chat_view(request):
 
 def message_view(request, sender, receiver):
     if not request.user.is_authenticated:
-        return redirect('login')
+        return redirect('index')
     if request.method == "GET":
-        return render(request, "chat/messages.html",
+        return render(request, "chat/message.html",
                       {'users': User.objects.exclude(username=request.user.username),
                        'receiver': User.objects.get(id=receiver),
                        'messages': Message.objects.filter(sender_id=sender, receiver_id=receiver) |

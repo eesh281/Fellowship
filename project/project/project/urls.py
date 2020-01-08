@@ -28,17 +28,17 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-token-auth/', obtain_jwt_token), 
     path('api/token/', obtain_jwt_token), 
-    path('login/', Login.as_view(), name='login'),
+    path('login/', Login.as_view(), name='index'),
     path('activate/<slug:surl>/', activate, name='activate'),
     path('registration/', Registrations.as_view(), name="registration"),
 
-    path('login/chat/chat/',chat_view, name='chats'),
+    path('chat/',chat_view, name='chats'),
     path('chat/<int:sender>/<int:receiver>', message_view, name='chat'),
     path('api/messages/<int:sender>/<int:receiver>', message_list, name='message-detail'),  
     path('api/messages/', message_list, name='message-list'),   
     path('api/users/<int:pk>', user_list, name='user-detail'),      
     path('api/users/', user_list, name='user-list'),   
-
+    
     path('forgot_password/', ForgotPassword.as_view(),name="forgot_Password"),
     path('reset_password/<slug:surl>/', reset_password, name="reset_password"),
     path('resetpassword/<user_reset>', ResetPassword.as_view(), name="resetpassword"),

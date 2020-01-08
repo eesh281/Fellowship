@@ -1,11 +1,67 @@
-{% load static %}
-<!DOCTYPE HTML>
-<html>
+{% load static %} 
+  <!DOCTYPE html>
+  <html>
     <head>
-        <title>successfully registered</title>
-        <link rel = "stylesheet" type="text/css" href="{% static 'styles/style.css' %}"/>
+     
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+       
+        <link type="text/css" rel="stylesheet" href="{% static 'styles/materialize.min.css' %}"  media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="{% static 'styles/style.css' %}"  media="screen,projection"/>
+      
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/chat.js' %}"></script>
+        
+        <title>login page</title>
+        <link rel = "stylesheet" type="text/css" href="{% static 'styles/user_style.css' %}"/>
+    
     </head>
     <body>
-    <h1>Successfull</h1>
+    {% block body %}
+        <div class="section blue lighten-3">
+            <div class="container white-text center-align text">
+            <h2>Chat</h2>
+            <p>A simple Chat App using DjangoRestFramework</p>
+            <div class="chip">
+                <img src="https://opbeat.com/docs/static/images/stacks/logo_django_alt.svg" class="white">
+                Django
+            </div>
+            <div class="chip">
+                <img src="http://materializecss.com/res/materialize.svg" class="white">
+                MaterializeCSS
+            </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+            <div class="col s12 m8 l6 offset-m2 offset-l3">
+                <div class="section center-block">
+                <div>
+                    {% block form %}
+                    <h3>
+                    Login
+                    </h3>
+                    <h1>Login Page</h1>
+                    <form action="" name="loginform" method="POST" onsubmit="return validate();">
+                        {% csrf_token %}
+                        <div>Username:</div> 
+                        <input id="user" type= "text" name = "username">
+                        <br>
+                        <div>Password:</div>
+                        <input id="pass" type = "password" name = "password">
+                        <br><br>
+                        
+                        <button onclick="myFunction()" id="button" >Submit</button>
+                        
+                    </form>
+                    {% endblock %}
+                </div>
+            </div>
+            </div>
+            </div>
+        </div>
+        {% endblock %}
     </body>
-    
+  </html>
