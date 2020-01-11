@@ -31,22 +31,14 @@ def user_list(request,pk=None):
 
 @csrf_exempt
 def message_list(request, sender=None, receiver=None):
-    print("hello1")
     
     if request.method == 'GET':
-        print("hello2")
         messages = Message.objects.filter(sender_id=sender, receiver_id=receiver, is_read=False)
-        print("this is my",messages)
         serializer = MessageSerializer(messages, many=True, context={'request': request})
-        print("hello3")
-        print("hello4 from me")
+        
         for message in messages:
-            print("hello4")
-            print(message)
             message.is_read = True
-            print("hello5")
             message.save()
-            print("hello6")
         return JsonResponse(serializer.data, safe=False)
 
     elif request.method == 'POST':
