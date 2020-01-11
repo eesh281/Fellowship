@@ -58,12 +58,9 @@ def chat_view(request):
 
 
 def message_view(request, sender, receiver):
-    print("hello1.1")
     if not request.user.is_authenticated:
-        print("hello1.2")
         return redirect('user/index')
     if request.method == "GET":
-        print("hello1.3")
         return render(request, "chat/message.html",
                       {'users': User.objects.exclude(username=request.user.username),
                        'receiver': User.objects.get(id=receiver),

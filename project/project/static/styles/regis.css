@@ -4,7 +4,8 @@ body {
     position: sticky;
     padding-top: 200px;
     font-style: oblique;
-    padding-top: 90px
+    padding-top: 90px;
+    background-size: 1800px 1000px
 }
 h1 {
     font-size:50 ; font-style: italic; color: rgb(194, 146, 201); -webkit-text-stroke: 1px black

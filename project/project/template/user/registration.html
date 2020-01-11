@@ -1,5 +1,5 @@
  
-{% extends 'user/index.html' %}
+{% comment %} {% extends 'user/index.html' %} {% endcomment %}
 {% block form %}
 {% load static %}
 <!DOCTYPE HTML>
@@ -23,25 +23,6 @@
                 
         </form>
     </body>
-    {% comment %} <script>
-    $(function () {
-        $('#register-form').on('submit', function (event) {
-            event.preventDefault();
-            var username = $('#id_username').val();
-            if(username !== '')
-            {
-                var password = $('#id_password').val();
-                if(password !== '' && password === $('#id_password2').val()){
-                    registration(username, password);
-                }
-                else{s
-                    alert("The passwords doesn't match!");
-                }
-            }
-            else
-                alert("Please enter a valid username!");
-        })
-    })
-    </script> {% endcomment %}
+ 
     {% endblock form %}
 
