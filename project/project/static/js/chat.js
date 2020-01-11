@@ -21,7 +21,7 @@ function scrolltoend() {
 }
 
 function send(sender, receiver, message) {
-    $.post('/api/messages', '{"sender": "' + sender + '", "receiver": "' + receiver + '","message": "' + message + '" }', function (data) {
+    $.post('/api/messages/', '{"sender": "' + sender + '", "receiver": "' + receiver + '","message": "' + message + '" }', function (data) {
         console.log(data);
         var box = text_box.replace('{sender}', "You");
         box = box.replace('{message}', message);
@@ -52,9 +52,10 @@ function getUsers(senderId, callback) {
             userState = JSON.stringify(data);
             const doc = data.reduce((res, user) => {
                 if (user.id === senderId) {
+                    console.log("res : " + senderId);
                     return res
                 } else {
-                   
+                    console.log("userDiv : " + senderId);
                     return [userDiv(senderId, user.id, user.username, user.online), ...res]
                 }
             }, [])
@@ -63,11 +64,11 @@ function getUsers(senderId, callback) {
     })
 }
 
-function register(username, password) {
+function registration(username, password) {
     $.post('/api/users', '{"username": "' + username + '", "password": "' + password + '"}',
         function (data) {
             console.log(data);
-            window.location = '/';
+             window.location = '/';
         }).fail(function (response) {
             $('#id_username').addClass('invalid');
         })

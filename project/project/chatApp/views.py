@@ -1,12 +1,10 @@
 from django.contrib.auth.models import User                                
-from django.http.response import JsonResponse
+from django.http.response import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 from chatApp.models import Message, UserProfile                                                
 from chatApp.serializers import MessageSerializer, UserSerializer 
 from django.shortcuts import render, redirect
-
-
 
 
 @csrf_exempt
@@ -32,14 +30,23 @@ def user_list(request,pk=None):
 
 
 @csrf_exempt
-def message_list(request, sender, receiver):
+def message_list(request, sender=None, receiver=None):
+    print("hello1")
     
     if request.method == 'GET':
+        print("hello2")
         messages = Message.objects.filter(sender_id=sender, receiver_id=receiver, is_read=False)
+        print("this is my",messages)
         serializer = MessageSerializer(messages, many=True, context={'request': request})
+        print("hello3")
+        print("hello4 from me")
         for message in messages:
+            print("hello4")
+            print(message)
             message.is_read = True
+            print("hello5")
             message.save()
+            print("hello6")
         return JsonResponse(serializer.data, safe=False)
 
     elif request.method == 'POST':
@@ -59,9 +66,12 @@ def chat_view(request):
 
 
 def message_view(request, sender, receiver):
+    print("hello1.1")
     if not request.user.is_authenticated:
+        print("hello1.2")
         return redirect('user/index')
     if request.method == "GET":
+        print("hello1.3")
         return render(request, "chat/message.html",
                       {'users': User.objects.exclude(username=request.user.username),
                        'receiver': User.objects.get(id=receiver),

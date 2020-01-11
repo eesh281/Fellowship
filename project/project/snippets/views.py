@@ -31,10 +31,9 @@ from django.contrib import messages
 from rest_framework.views import APIView
 from project.settings import EMAIL_HOST_USER
 from django.core.mail import send_mail
-from snippets.token import token_activation,token_validation,account_activation_token
+from snippets.token import token_activation
 from rest_framework.response import Response
 from .serializers import EmailSerializer,LoginSerializer, RegistrationSerializer, UserSerializer,ResetPasswordSerializer
-#from django.core.validators import validate_email
 from django_short_url.views import get_surl
 from django_short_url.models import ShortURL
 from django.http import HttpResponse, HttpResponseRedirect , response
@@ -76,7 +75,7 @@ class Registrations(GenericAPIView):
     def get(self, request):
         return render(request, 'user/registration.html')
         
-    def post(self, request, *args, **kwargs):        
+    def post(self, request):        
         name = request.POST.get('name')
         username = request.POST.get('username')
         email = request.POST.get('email')
@@ -240,71 +239,6 @@ class ForgotPassword(GenericAPIView):
         return HttpResponse(json.dumps(response))
 
 
-# class ForgotPassword(GenericAPIView):
-    
-#     serializer_class = EmailSerializer
-
-#     def get(self, request):
-#         return render(request, 'forgot_password.html')
-        
-#     def post(self, request):
-        
-#         global response
-#         #email = request.POST.get["email"]
-#         email = self.request.GET.get("email")
-#         smd = {
-#             'success': False,
-#             'message': "not a vaild email ",
-#             'data': []
-#         }
-#         if email == "":
-#             response['message'] = 'email field is empty please provide vaild input'
-#             return HttpResponse(json.dumps(response), status=400)
-#         else:
-#             try:
-#                 validate_email(email)
-#             except Exception:
-#                 return HttpResponse(json.dumps(response) ,status=400)
-#             try:
-#                 user = User.objects.filter(email=email)
-#                 useremail = user.values()[0]["email"]
-#                 username = user.values()[0]["username"]
-#                 print(useremail)
-#                 print(useremail)
-#                 print(user)
-                
-
-#                 if useremail is not None:
-#                     token = token_activation(useremail,username)
-#                     url = str(token)
-#                     surl = get_surl(url)
-#                     z = surl.split("/")
-
-#                     mail_subject = "Activate your account by clicking below link"
-#                     mail_message = render_to_string('email_validation.html', {
-#                         'user': username,
-#                         'domain': get_current_site(request).domain,
-#                         'surl': z[2]
-#                     })
-#                     recipientemail = email
-#                     subject, from_email, to = 'greetings', "kour.gursheesh281@gmail.com", recipientemail
-#                     msg = EmailMultiAlternatives(subject, mail_message, from_email, [to])
-#                     msg.attach_alternative(mail_message, "text/html")
-#                     msg.send()
-#                     ee.emit('send_email', recipientemail, mail_message)
-#                     response = {
-#                         'success': True,
-#                         'message': "check email for resetting password ",
-#                         'data': []
-#                         }      
-#                     return render(request, 'reset_password.html')
-
-#                 return HttpResponse(json.dumps(response), status=201)
-#             except Exception as e:
-#                 response['message'] = "something went wrong"
-#                 return HttpResponse(json.dumps(response), status=400)
-
-
 def activate(request, surl):
     print("Activate url is ", surl)   
     try:
@@ -317,7 +251,7 @@ def activate(request, surl):
             user.is_active = True
             user.save()
             messages.info(request, "your account is active now")
-            return redirect('user/index')        
+            return redirect('index')        
         else:           
             messages.info(request, 'was not able to sent the email')          
             return redirect('user/registration')
