@@ -1,3 +1,8 @@
+#**************************************************************************************************
+#purpose:to implement login, registeration page
+#file name:views.py
+#author name:Gursheesh Kour
+#**************************************************************************************************
 import datetime
 import json
 import django

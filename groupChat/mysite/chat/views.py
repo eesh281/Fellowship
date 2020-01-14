@@ -1,3 +1,8 @@
+#**************************************************************************************************
+#purpose:to implement chatapp for multiple users
+#file name:views.py
+#author name:Gursheesh Kour
+#**************************************************************************************************
 from django.shortcuts import render
 
 def index(request):
