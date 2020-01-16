@@ -1,24 +1,27 @@
+#**************************************************************************************************
+#purpose:to implement login, registeration page
+#file name:views.py
+#author name:Gursheesh Kour
+#**************************************************************************************************
 import datetime
 import json
 import django
 import jwt
 from django.template.loader import render_to_string
-from pyee import BaseEventEmitter 
-from pymitter import EventEmitter
-from lib.emitter import ee
+
 from validate_email import validate_email
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.core.mail import EmailMultiAlternatives
-# from .forms import SignupForm
+
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
- # from .tokens import account_activation_token
+
 from django.core.mail import EmailMessage
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-# from django.conf import setting
+
 from django.shortcuts import render
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
@@ -40,9 +43,6 @@ from django.http import HttpResponse, HttpResponseRedirect , response
 from jwt import ExpiredSignatureError
 from project.settings import SECRET_KEY
 
-# def home(request):
-   
-#     return render(request, 'login.html')
 
 class Login(GenericAPIView):
 
@@ -158,24 +158,6 @@ class Registrations(GenericAPIView):
             smd["message"] = "last return"
             return HttpResponse(json.dumps(smd), status=400)
 
-# class Logout(GenericAPIView):
-#     serializer_class = LoginSerializer
-
-#     def get(self, request):
-     
-#         smd = {
-#             "success": False,            
-#             "message": "not a vaild user", 
-#             "data": []
-#             }
-
-#         try:
-#             user = request.user
-#             red.delete(user.username)
-#             smd = {"success": True, "message": " logged out", "data": []}
-#             return HttpResponse(json.dumps(smd), status=200)
-#         except Exception:
-#             return HttpResponse(json.dumps(smd), status=400)
 
 class ForgotPassword(GenericAPIView):
  
@@ -328,7 +310,7 @@ class ResetPassword(GenericAPIView):
                 }
                 return HttpResponse(json.dumps(smd), status=201)
             except User.DoesNotExist:
-                smd['message'] = 'not a vaild user '
+                smd['message'] = 'not a vaild user'
                 return HttpResponse(json.dumps(smd), status=400)
 
 

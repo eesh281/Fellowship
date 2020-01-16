@@ -1,3 +1,9 @@
+#*************************************************************************************************
+#purpose:to implement peer to peer chatapp
+#file name:views.py
+#author name:Gursheesh Kour
+#**************************************************************************************************
+
 from django.contrib.auth.models import User                                
 from django.http.response import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
